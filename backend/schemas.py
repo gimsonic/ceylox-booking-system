@@ -26,14 +26,24 @@ class Service(ServiceCreate):
 class UserBase(BaseModel):
     full_name: str
     email : EmailStr
-    mobile : str | None = None
+    # mobile: Optional[str] = None
+    mobile : str 
 
 class UserCreate(UserBase):
-    '''Used for the 'Lazy Registration' process'''
-    pass
+    password: str
 
-class User(UserCreate):
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+# Response
+class User(UserBase):
     id : UUID
+    full_name: str
+    email: EmailStr
+    mobile: str
+    is_guest: bool
+    is_active: bool
 
     class Config:
         from_attributes = True
@@ -51,7 +61,7 @@ class BookingCreate(BookingBase):
     email: EmailStr
     mobile: Optional[str] = None
 
-class Booking(BookingCreate):
+class Booking(BookingBase):
     # The complete Booking object as stored in thr DB
     id: UUID
     user_id: UUID # Link the BOOKING back with USER table
@@ -59,3 +69,17 @@ class Booking(BookingCreate):
     
     class Config:
         from_attributes = True
+
+
+''' -- Security and Token schemas -- '''
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str
+    user: User
+
+class TokenData(BaseModel):
+    email: Optional[str] = None
