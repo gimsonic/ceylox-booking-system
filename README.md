@@ -1,4 +1,5 @@
 ⭐ Ceylox
+
 Modular Cross-Platform Service Booking System
 
 Ceylox is a scalable booking platform designed to support multiple service-based industries such as hospitality, healthcare, wellness, and appointment-driven businesses.
@@ -151,3 +152,21 @@ refresh tokens
 logout token revocation
 
 role-based access control
+
+## 📸 Screenshots
+
+### Home
+
+![Home](screenshots/home.png)
+
+### Catalog
+
+![Catalog](screenshots/catalog.png)
+
+### Booking
+
+![Booking](screenshots/booking.png)
+
+### Signup
+
+![Signup](screenshots/signup.png)
