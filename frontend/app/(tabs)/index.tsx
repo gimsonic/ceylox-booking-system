@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import { router } from "expo-router";
+import React, { useEffect, useRef } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
   Animated,
   Dimensions,
+  ImageBackground,
   StatusBar,
-} from 'react-native';
-import { router } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const WelcomeScreen = () => {
   const insets = useSafeAreaInsets();
@@ -32,32 +32,70 @@ const WelcomeScreen = () => {
     Animated.sequence([
       // 1. Brand name fades in from below
       Animated.parallel([
-        Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }),
-        Animated.timing(slideAnim, { toValue: 0, duration: 800, useNativeDriver: true }),
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(slideAnim, {
+          toValue: 0,
+          duration: 800,
+          useNativeDriver: true,
+        }),
       ]),
       // 2. Divider line grows
-      Animated.timing(dividerWidth, { toValue: 60, duration: 400, useNativeDriver: false }),
+      Animated.timing(dividerWidth, {
+        toValue: 60,
+        duration: 400,
+        useNativeDriver: false,
+      }),
       // 3. Tagline appears
       Animated.parallel([
-        Animated.timing(taglineFade, { toValue: 1, duration: 600, useNativeDriver: true }),
-        Animated.timing(taglineSlide, { toValue: 0, duration: 600, useNativeDriver: true }),
+        Animated.timing(taglineFade, {
+          toValue: 1,
+          duration: 600,
+          useNativeDriver: true,
+        }),
+        Animated.timing(taglineSlide, {
+          toValue: 0,
+          duration: 600,
+          useNativeDriver: true,
+        }),
       ]),
       // 4. Badge + button appear
       Animated.parallel([
-        Animated.timing(badgeFade, { toValue: 1, duration: 500, useNativeDriver: true }),
-        Animated.timing(buttonFade, { toValue: 1, duration: 500, useNativeDriver: true }),
-        Animated.timing(buttonSlide, { toValue: 0, duration: 500, useNativeDriver: true }),
+        Animated.timing(badgeFade, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(buttonFade, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(buttonSlide, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
       ]),
     ]).start();
   }, []);
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
 
       {/* Full-bleed hero image */}
       <ImageBackground
-        source={{ uri: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070' }}
+        source={{
+          uri: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070",
+        }}
         style={styles.hero}
         resizeMode="cover"
       >
@@ -66,7 +104,12 @@ const WelcomeScreen = () => {
         <View style={styles.overlayBottom} />
 
         {/* Top bar — small branding */}
-        <Animated.View style={[styles.topBar, { paddingTop: insets.top + 12, opacity: badgeFade }]}>
+        <Animated.View
+          style={[
+            styles.topBar,
+            { paddingTop: insets.top + 12, opacity: badgeFade },
+          ]}
+        >
           <View style={styles.topBadge}>
             <Text style={styles.topBadgeText}>SRI LANKA · EST. 2026</Text>
           </View>
@@ -74,7 +117,6 @@ const WelcomeScreen = () => {
 
         {/* Center hero content */}
         <View style={styles.heroContent}>
-
           {/* Eyebrow label */}
           <Animated.Text style={[styles.eyebrow, { opacity: fadeAnim }]}>
             LUXURY STAYS
@@ -97,10 +139,13 @@ const WelcomeScreen = () => {
           <Animated.Text
             style={[
               styles.tagline,
-              { opacity: taglineFade, transform: [{ translateY: taglineSlide }] },
+              {
+                opacity: taglineFade,
+                transform: [{ translateY: taglineSlide }],
+              },
             ]}
           >
-            Redefining the{'\n'}standard of stay.
+            Redefining the{"\n"}standard of stay.
           </Animated.Text>
         </View>
 
@@ -117,20 +162,24 @@ const WelcomeScreen = () => {
         >
           {/* Feature pills */}
           <View style={styles.pillRow}>
-            {['Free Cancellation', 'Best Rate', 'Instant Confirm'].map((label) => (
-              <View key={label} style={styles.pill}>
-                <Text style={styles.pillText}>{label}</Text>
-              </View>
-            ))}
+            {["Free Cancellation", "Best Rate", "Instant Confirm"].map(
+              (label) => (
+                <View key={label} style={styles.pill}>
+                  <Text style={styles.pillText}>{label}</Text>
+                </View>
+              ),
+            )}
           </View>
 
           {/* Main CTA button */}
           <TouchableOpacity
             style={styles.primaryButton}
             activeOpacity={0.85}
-            onPress={() => router.push('/catalog')}
+            onPress={() => router.push("/catalog")}
           >
-            <Text style={styles.primaryButtonText}>Explore Available Rooms</Text>
+            <Text style={styles.primaryButtonText}>
+              Explore Available Rooms
+            </Text>
             <Text style={styles.buttonArrow}>→</Text>
           </TouchableOpacity>
 
@@ -138,13 +187,15 @@ const WelcomeScreen = () => {
           <TouchableOpacity
             style={styles.secondaryButton}
             activeOpacity={0.85}
-            onPress={() => router.push('/signup2')}
+            onPress={() => router.push("/signup")}
           >
             <Text style={styles.secondaryButtonText}>Create an Account</Text>
           </TouchableOpacity>
 
           {/* Subtle sub-link */}
-          <Text style={styles.subLink}>No account needed · Book in 60 seconds</Text>
+          <Text style={styles.subLink}>
+            No account needed · Book in 60 seconds
+          </Text>
         </Animated.View>
       </ImageBackground>
     </View>
@@ -158,73 +209,73 @@ const styles = StyleSheet.create({
   // Dual overlay for depth
   overlayTop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.25)',
+    backgroundColor: "rgba(0,0,0,0.25)",
   },
   overlayBottom: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     height: height * 0.55,
-    backgroundColor: 'rgba(0,0,0,0.6)',
+    backgroundColor: "rgba(0,0,0,0.6)",
   },
 
   // Top bar
   topBar: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     paddingHorizontal: 24,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   topBadge: {
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.4)',
+    borderColor: "rgba(255,255,255,0.4)",
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 4,
   },
   topBadgeText: {
-    color: 'rgba(255,255,255,0.7)',
+    color: "rgba(255,255,255,0.7)",
     fontSize: 9,
-    fontWeight: '700',
+    fontWeight: "700",
     letterSpacing: 2,
   },
 
   // Hero content
   heroContent: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     paddingHorizontal: 32,
     paddingBottom: 40,
   },
   eyebrow: {
-    color: '#2ecc71',
+    color: "#2ecc71",
     fontSize: 11,
-    fontWeight: '800',
+    fontWeight: "800",
     letterSpacing: 4,
     marginBottom: 12,
   },
   brand: {
     fontSize: 72,
-    fontWeight: '900',
-    color: '#ffffff',
+    fontWeight: "900",
+    color: "#ffffff",
     letterSpacing: -2,
     lineHeight: 76,
   },
   divider: {
     height: 2,
-    backgroundColor: '#2ecc71',
+    backgroundColor: "#2ecc71",
     marginTop: 16,
     marginBottom: 20,
   },
   tagline: {
     fontSize: 22,
-    color: 'rgba(255,255,255,0.85)',
+    color: "rgba(255,255,255,0.85)",
     lineHeight: 32,
-    fontWeight: '300',
+    fontWeight: "300",
     letterSpacing: 0.3,
   },
 
@@ -233,56 +284,69 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   pillRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
     marginBottom: 20,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   pill: {
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
+    borderColor: "rgba(255,255,255,0.3)",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: "rgba(255,255,255,0.08)",
   },
   pillText: {
-    color: 'rgba(255,255,255,0.75)',
+    color: "rgba(255,255,255,0.75)",
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   primaryButton: {
-    backgroundColor: '#2ecc71',
+    backgroundColor: "#2ecc71",
     paddingVertical: 18,
     paddingHorizontal: 24,
     borderRadius: 14,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    //width: "90%",
+    alignItems: "center",
+    //alignSelf: "center",
     marginBottom: 12,
   },
-  primaryButtonText: { color: '#fff', fontSize: 16, fontWeight: '800', letterSpacing: 0.2 },
+  primaryButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "800",
+    letterSpacing: 0.2,
+  },
   buttonArrow: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 20,
-    fontWeight: '300',
+    fontWeight: "300",
   },
   secondaryButton: {
     borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.5)',
+    borderColor: "rgba(255,255,255,0.5)",
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 14,
-    alignItems: 'center',
+    alignItems: "center",
+    //alignSelf: "center",
     marginBottom: 16,
-    backgroundColor: 'rgba(255,255,255,0.07)',
+    backgroundColor: "rgba(255,255,255,0.07)",
   },
-  secondaryButtonText: { color: '#fff', fontSize: 15, fontWeight: '700', letterSpacing: 0.2 },
-  
+  secondaryButtonText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "700",
+    letterSpacing: 0.2,
+  },
+
   subLink: {
-    color: 'rgba(255,255,255,0.4)',
+    color: "rgba(255,255,255,0.4)",
     fontSize: 11,
-    textAlign: 'center',
+    textAlign: "center",
     letterSpacing: 0.3,
   },
 });

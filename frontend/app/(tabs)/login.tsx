@@ -74,6 +74,55 @@ const LoginScreen = () => {
     setSubmitting(true);
 
     try {
+      const loginRes = await fetch(`${API_URL}/login/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const loginData = await loginRes.json().catch(() => null);
+
+      if (!loginRes.ok) {
+        throw new Error(
+          loginData?.detail || `Login failed (${loginRes.status})`,
+        );
+      }
+
+      await saveAuthSession({
+        id: loginData.user.id,
+        full_name: loginData.user.full_name,
+        email: loginData.user.email,
+        token: loginData.access_token,
+      });
+
+      setSuccessMsg(`Welcome back, ${loginData.user.full_name}!`);
+      setTimeout(() => router.replace("/catalog"), 1200);
+    } catch (err: any) {
+      setValidationMsg(
+        err.message || "Something went wrong. Please try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  /*
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setValidationMsg("Please enter your email and password.");
+      return;
+    }
+    if (!email.includes("@")) {
+      setValidationMsg("Please enter a valid email address.");
+      return;
+    }
+
+    setValidationMsg(null);
+    setSubmitting(true);
+
+    try {
       // ─────────────────────────────────────────────
       // 📘 LESSON: OAuth2 Password Flow
       // FastAPI's /auth/token endpoint follows the OAuth2
@@ -125,6 +174,7 @@ const LoginScreen = () => {
       setSubmitting(false);
     }
   };
+  */
 
   const inputStyle = (field: string) => [
     styles.input,

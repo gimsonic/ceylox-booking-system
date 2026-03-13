@@ -1,36 +1,32 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
-// ─────────────────────────────────────────────
-// 📘 EXPO ROUTER LESSON: _layout.tsx
-//
-// This file is the heart of your navigation setup.
-// Expo Router automatically reads this file and uses it
-// to configure how screens look and transition.
-//
-// Think of it as your old app.tsx Stack.Navigator,
-// but cleaner — no NavigationContainer, no imports of
-// every screen. Expo Router finds screens automatically
-// by their filename inside the app/ folder.
-// ─────────────────────────────────────────────
+//import { useEffect } from "react";
+//import { clearAuthSession } from "./auth";
 
 export default function RootLayout() {
+  {
+    /*
+    useEffect(() => {
+      clearAuthSession();
+    }, []);*/
+  }
   return (
     <Stack
       // Default styling applied to ALL screens unless overridden below
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#ffffff',
+          backgroundColor: "#ffffff",
         },
-        headerTintColor: '#2ecc71',         // Back arrow color
+        headerTintColor: "#2ecc71", // Back arrow color
         headerTitleStyle: {
-          fontWeight: '800',
-          color: '#2c3e50',
+          fontWeight: "800",
+          color: "#2c3e50",
           fontSize: 16,
         },
-        headerBackTitle: '',                // Hides the text next to back arrow on iOS (cleaner look)
-        animation: 'slide_from_right',     // Consistent slide animation on both iOS & Android
+        headerBackTitle: "", // Hides the text next to back arrow on iOS (cleaner look)
+        animation: "slide_from_right", // Consistent slide animation on both iOS & Android
         contentStyle: {
-          backgroundColor: '#f8f9fa',       // Prevents white flash between screen transitions
+          backgroundColor: "#f8f9fa", // Prevents white flash between screen transitions
         },
       }}
     >
@@ -43,7 +39,7 @@ export default function RootLayout() {
         name="index"
         options={{
           headerShown: false,
-          animation: 'fade',              // Fade in on first load feels more premium
+          animation: "fade", // Fade in on first load feels more premium
         }}
       />
 
@@ -65,7 +61,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="booking"
         options={{
-          title: 'Secure Booking',
+          title: "Secure Booking",
         }}
       />
     </Stack>
